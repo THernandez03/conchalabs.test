@@ -1,0 +1,10 @@
+{
+  "presets": [
+    "babel-preset-thernandez",
+    ["@babel/preset-react", { "runtime": "automatic" }],
+    "@emotion/babel-preset-css-prop"
+  ],
+  "plugins": [
+    "@emotion"
+  ]
+}
