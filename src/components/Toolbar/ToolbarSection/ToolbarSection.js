@@ -1,23 +1,14 @@
+import { Children, cloneElement } from 'react';
 import styled from '@emotion/styled';
 
 import { ToolbarItem } from '../ToolbarItem';
-import { getSizeAndUnit } from '../../../utils';
 
-export const ToolbarSection = styled(({ children, className }) => (
-  <div className={className}>{children}</div>
+export const ToolbarSection = styled(({ children, className, size }) => (
+  <div className={className}>
+    {Children.map(children, (child) => cloneElement(child, { size }))}
+  </div>
 ))`
   display: flex;
-
-  ${({ size }) => {
-    const [value, unit] = getSizeAndUnit(size);
-
-    return `
-      > ${ToolbarItem} {
-        width: ${value * 2}${unit};
-        height: ${value * 2}${unit};
-      }
-    `;
-  }}
 
   ${({ type }) => {
     if (type === 'center') {

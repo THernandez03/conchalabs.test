@@ -1,1 +1,1 @@
-export { ToolbarItem } from './ToolbarItem';
+export * from './ToolbarItem';

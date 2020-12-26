@@ -1,1 +1,1 @@
-export { Equalizer } from './Equalizer';
+export * from './Equalizer';

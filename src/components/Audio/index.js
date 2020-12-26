@@ -1,1 +1,1 @@
-export { Audio } from './Audio';
+export * from './Audio';

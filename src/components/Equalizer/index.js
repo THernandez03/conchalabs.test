@@ -1,2 +1,2 @@
-export { Equalizer } from './Equalizer';
-export { EqualizerSlider } from './EqualizerSlider';
+export * from './Equalizer';
+export * from './EqualizerSlider';

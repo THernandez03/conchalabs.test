@@ -1,3 +1,3 @@
-export { Toolbar } from './Toolbar';
-export { ToolbarSection } from './ToolbarSection';
-export { ToolbarItem } from './ToolbarItem';
+export * from './Toolbar';
+export * from './ToolbarSection';
+export * from './ToolbarItem';

@@ -25,22 +25,17 @@ export const Home = styled(({ className }) => {
       </SetupWrapper>
       <AppWrapper>
         <Equalizer source={audioElement}>
-          <EqualizerSlider type="lowpass" frecuency={{ value: 1000 }} />
-          <EqualizerSlider
-            type="bandpass"
-            frecuency={{ value: 2500, minValue: 1000, maxValue: 4000 }}
-          />
-          <EqualizerSlider type="highpass" frecuency={{ value: 4000 }} />
+          <EqualizerSlider type="lowpass" frequency={1000} />
+          <EqualizerSlider type="bandpass" frequency={2500} />
+          <EqualizerSlider type="highpass" frequency={4000} />
         </Equalizer>
         <Toolbar
           size="1.5rem"
-          left={({ size }) => [
-            <ToolbarItem key="music" icon={<BsMusicNoteList size={size} />} />,
-          ]}
-          center={({ size }) => [
-            <ToolbarItem key="prev" icon={<BiSkipPrevious size={size} />} />,
-            <PlayPause key="play" size={size} />,
-            <ToolbarItem key="next" icon={<BiSkipNext size={size} />} />,
+          left={[<ToolbarItem key="music" icon={<BsMusicNoteList />} />]}
+          center={[
+            <ToolbarItem key="prev" icon={<BiSkipPrevious />} />,
+            <PlayPause key="play" />,
+            <ToolbarItem key="next" icon={<BiSkipNext />} />,
           ]}
         />
       </AppWrapper>

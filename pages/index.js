@@ -14,10 +14,14 @@ const cssGlobal = css`
 `;
 
 export const Index = () => (
-  <Provider store={getStore()}>
-    <Global styles={cssGlobal} />
-    <Home />
-  </Provider>
+  <React.StrictMode>
+    {typeof window === 'undefined' ? null : (
+      <Provider store={getStore()}>
+        <Global styles={cssGlobal} />
+        <Home />
+      </Provider>
+    )}
+  </React.StrictMode>
 );
 
 export default Index;

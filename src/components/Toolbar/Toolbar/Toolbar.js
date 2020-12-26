@@ -7,13 +7,13 @@ import { getSizeAndUnit } from '../../../utils';
 export const Toolbar = styled(({ className, size, left, center, right }) => (
   <div className={className}>
     <ToolbarSection type="left" size={size}>
-      {left({ size })}
+      {left}
     </ToolbarSection>
     <ToolbarSection type="center" size={size}>
-      {center({ size })}
+      {center}
     </ToolbarSection>
     <ToolbarSection type="right" size={size}>
-      {right({ size })}
+      {right}
     </ToolbarSection>
   </div>
 ))`
@@ -38,13 +38,13 @@ export const Toolbar = styled(({ className, size, left, center, right }) => (
 `;
 
 Toolbar.propTypes = {
-  center: PropTypes.func,
-  left: PropTypes.func,
-  right: PropTypes.func,
+  center: PropTypes.arrayOf(PropTypes.element),
+  left: PropTypes.arrayOf(PropTypes.element),
+  right: PropTypes.arrayOf(PropTypes.element),
 };
 
 Toolbar.defaultProps = {
-  center: () => {},
-  left: () => {},
-  right: () => {},
+  center: [],
+  left: [],
+  right: [],
 };

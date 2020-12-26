@@ -16,5 +16,7 @@ export const PlayPause = ({ size }) => {
     <BsPlayFill size={size} />
   );
 
-  return <ToolbarItem icon={icon} onClick={() => dispatch(toggle)} />;
+  return (
+    <ToolbarItem icon={icon} onClick={() => dispatch(toggle)} size={size} />
+  );
 };

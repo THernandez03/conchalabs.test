@@ -1,1 +1,1 @@
-export { ToolbarSection } from './ToolbarSection';
+export * from './ToolbarSection';

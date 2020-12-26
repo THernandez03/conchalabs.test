@@ -1,1 +1,1 @@
-export { EqualizerSlider } from './EqualizerSlider';
+export * from './EqualizerSlider';

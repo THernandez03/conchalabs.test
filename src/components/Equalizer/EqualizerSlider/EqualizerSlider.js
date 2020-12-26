@@ -1,28 +1,27 @@
-import { useEffect } from 'react';
 import styled from '@emotion/styled';
 
-export const EqualizerSlider = styled(({ className, type, frequency, gain }) => {
-  //
-  // const filter = useBiquadFilter({
-  // type,
-  // gain,
-  // frequency,
-  // q,
-  // });
-  //
+export const EqualizerSlider = styled(
+  ({ className, type, frequency, biquadFilter }) => {
+    if (!biquadFilter) return null;
 
-  console.log({ type, frequency, gain });
-  useEffect(() => {}, []);
+    biquadFilter.type = type;
+    biquadFilter.frequency.value = frequency;
 
-  return (
-    <input
-      className={className}
-      type="range"
-      orient="vertical"
-      min="-40"
-      max="40"
-    />
-  );
-})`
-  transform: rotate(-90deg);
+    const handleSliderChange = (event) => {
+      biquadFilter.gain.value = event.target.value;
+    };
+
+    return (
+      <input
+        className={className}
+        type="range"
+        defaultValue={0}
+        onChange={handleSliderChange}
+        min="-40"
+        max="40"
+      />
+    );
+  },
+)`
+  transform: rotate(-90deg) scale(2.5);
 `;
