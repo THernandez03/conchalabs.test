@@ -1,10 +1,9 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, forwardRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { PLAYING, PAUSED } from '../../constants';
 
-export const Audio = () => {
-  const ref = useRef();
+export const Audio = forwardRef((props, ref) => {
   const musicStatus = useSelector((state) => state.controls.status);
 
   useEffect(() => {
@@ -13,14 +12,16 @@ export const Audio = () => {
     } else if (musicStatus === PAUSED) {
       ref.current.pause();
     }
-  }, [musicStatus]);
+  }, [ref, musicStatus]);
 
   return (
     <audio
       ref={ref}
+      loop
+      autoPlay
       src="try-it-now_nature_Eventually,_all_things_merge_into_one,_and_a_river_runs_through_it_burgh_gentle_stream_12.wav"
     >
       <track default kind="captions" />
     </audio>
   );
-};
+});
