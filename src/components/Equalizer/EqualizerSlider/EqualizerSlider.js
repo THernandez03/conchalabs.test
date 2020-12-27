@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 
 export const EqualizerSlider = styled(
   ({ className, type, frequency, biquadFilter }) => {
-    if (!biquadFilter) return null;
-
     biquadFilter.type = type;
     biquadFilter.frequency.value = frequency;
 

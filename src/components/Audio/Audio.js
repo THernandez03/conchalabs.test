@@ -1,17 +1,22 @@
 import { useEffect, forwardRef, useImperativeHandle } from 'react';
 import { useSelector } from 'react-redux';
 
-import { PLAYING, PAUSED } from '../../constants';
+import { PLAYING, PAUSED } from '../../constants/controlStatus';
 
 export const Audio = forwardRef((props, ref) => {
-  const musicStatus = useSelector((state) => state.controls.status);
+  const musicStatus = useSelector((state) => state.musicStatus);
+  const audioContext = useSelector((state) => state.audio.context);
 
   useEffect(() => {
-    if (musicStatus === PLAYING) {
-      ref.current.play();
-    } else if (musicStatus === PAUSED) {
-      ref.current.pause();
-    }
+    const toggleMusic = async () => {
+      if (musicStatus === PLAYING) {
+        await audioContext?.resume();
+        ref.current.play();
+      } else if (musicStatus === PAUSED) {
+        ref.current.pause();
+      }
+    };
+    toggleMusic();
   }, [ref, musicStatus]);
 
   return (

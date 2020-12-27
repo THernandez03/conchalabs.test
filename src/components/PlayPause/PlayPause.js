@@ -2,11 +2,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BsPlayFill, BsPauseFill } from 'react-icons/bs';
 
 import { ToolbarItem } from '../Toolbar';
-import { PLAYING } from '../../constants';
+import { PLAYING } from '../../constants/controlStatus';
 import { toggle } from '../../actions';
 
 export const PlayPause = ({ size }) => {
-  const musicStatus = useSelector((state) => state.controls.status);
+  const musicStatus = useSelector((state) => state.musicStatus);
   const dispatch = useDispatch();
 
   const isPlaying = musicStatus === PLAYING || false;
@@ -17,6 +17,6 @@ export const PlayPause = ({ size }) => {
   );
 
   return (
-    <ToolbarItem icon={icon} onClick={() => dispatch(toggle)} size={size} />
+    <ToolbarItem icon={icon} onClick={() => dispatch(toggle())} size={size} />
   );
 };

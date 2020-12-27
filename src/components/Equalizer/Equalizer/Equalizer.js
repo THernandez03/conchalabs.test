@@ -1,66 +1,56 @@
 import { Children, cloneElement, useEffect, useState, useReducer } from 'react';
 import styled from '@emotion/styled';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { useAudioContext, useMediaSource } from '../../../hooks';
+const ADD_AUDIO_DEPS = 'ADD_AUDIO_DEPS';
+const ADD_SLIDERS = 'ADD_SLIDERS';
 
-const AUDIO_DEPS_DONE = 'AUDIO_DEPS_DONE';
-const CHILDREN_DONE = 'CHILDREN_DONE';
-
-const Reducer = (state, action) => {
+export const equalizerReducer = (state, action) => {
   switch (action.type) {
-    case AUDIO_DEPS_DONE: {
-      return { ...state, ...action.payload };
+    case ADD_AUDIO_DEPS: {
+      const { context, source } = action.payload;
+      return { ...state, context, source };
     }
-    case CHILDREN_DONE: {
-      return { ...state, ...action.payload };
+    case ADD_SLIDERS: {
+      const { audioContext, mediaSource } = action.payload;
+      return { ...state, sliders };
     }
-    default: {
-      throw new Error('action.type was not defined');
-    }
+    default: throw new Error('triggered action was not defined in the reducer')
   }
-};
+}
 
-export const Equalizer = styled(({ className, children, source }) => {
-  const [state, dispatch] = useReducer(Reducer, { clonedChildren: [] });
-  const { audioContext, mediaSource, clonedChildren } = state;
+export const Equalizer = styled(({ className, children, audioElement }) => {
+  const [state, dispatch] = useReducer(equalizerReducer)
+  const { sliders, context, source } = state;
 
   useEffect(() => {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const context = new AudioContext();
-    // const mediaElementSource = context.createMediaElementSource(source.current);
+    const audioContext = new AudioContext();
+    const mediaSource = audioContext.createMediaElementSource(audioElement.current);
 
-    window.ctx = context;
+    dispatch({ type: ADD_AUDIO_DEPS, payload: { audioContext, mediaSource } });
+  }, [audioElement]);
 
-    dispatch({
-      type: AUDIO_DEPS_DONE,
-      payload: { audioContext: context },
-    });
-  }, [source]);
+  useEffect(() => {
+    if (!context || !source) return;
 
-  // useEffect(() => {
-  //   if (!audioContext) return;
+    const cloned = Children.map(children, (child) =>
+      cloneElement(child, {
+        biquadFilter: context.createBiquadFilter(),
+      }),
+    );
 
-  //   const cloned = Children.map(children, (child) =>
-  //     cloneElement(child, {
-  //       biquadFilter: audioContext?.createBiquadFilter(),
-  //     }),
-  //   );
+    source.disconnect();
+    const filter = cloned.reduce(
+      (acc, child) => source.connect(child.props.biquadFilter),
+      source,
+    );
+    filter.connect(context.destination);
 
-  //   dispatch({ type: CHILDREN_DONE, payload: { clonedChildren: cloned } });
-  // }, [audioContext, children]);
+    dispatch({ type: ADD_SLIDERS, payload: { audioContext, mediaSource } });
+  }, [context, source]);
 
-  // useEffect(() => {
-  //   if (!mediaSource || !clonedChildren.length || !audioContext) return;
-
-  //   mediaSource.disconnect();
-  //   const filter = clonedChildren.reduce(
-  //     (acc, child) => mediaSource.connect(child.props.biquadFilter),
-  //     mediaSource,
-  //   );
-  //   filter.connect(audioContext.destination);
-  // }, [clonedChildren, audioContext, mediaSource]);
-
-  return <div className={className}>{clonedChildren}</div>;
+  return <div className={className}>{sliders}</div>;
 })`
   display: flex;
   flex-grow: 1;
