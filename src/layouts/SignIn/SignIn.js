@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import styled from '@emotion/styled';
 import { useQuery } from 'react-query';
-import firebase from 'firebase/app';
+import firebase from '@firebase/app';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { signIn } from '../../actions';
@@ -18,7 +18,7 @@ export const SignIn = styled(({ className, NextPageComponent }) => {
     return NextPageComponent ? <NextPageComponent /> : <Home />;
   }
 
-  const handleSignInClick = async (event) => {
+  const handleSignInClick = () => {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleAuthProvider);
   };

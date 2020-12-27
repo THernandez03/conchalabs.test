@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { GoSignOut } from 'react-icons/go';
 import styled from '@emotion/styled';
-import firebase from 'firebase/app';
+import firebase from '@firebase/app';
 
 import { ToolbarItem } from '../Toolbar';
 import { signOut } from '../../actions';
@@ -9,7 +9,7 @@ import { signOut } from '../../actions';
 export const SignOutButton = styled(({ className, size }) => {
   const dispatch = useDispatch();
 
-  const handleSignOutClick = (event) => {
+  const handleSignOutClick = () => {
     dispatch(signOut());
     firebase.auth().signOut();
   };

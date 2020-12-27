@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { Global, css } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from '@firebase/app';
+import '@firebase/auth';
 
 import { config } from '../src/configs/firebase/setup';
 import { getStore } from '../src/configs/redux/store';
@@ -26,7 +26,7 @@ export const Index = () => {
     setInitialized(true);
   }, []);
 
-  if  (!initialized) return null;
+  if (!initialized) return null;
 
   return (
     <React.StrictMode>
