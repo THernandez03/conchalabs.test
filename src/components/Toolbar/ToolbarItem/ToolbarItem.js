@@ -11,6 +11,11 @@ export const ToolbarItem = styled(({ className, icon, onClick, size }) => (
   border: 0;
   border-radius: 50px;
 
+  > svg {
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+  }
+
   ${({ size = '1.5rem' }) => {
     const [value, unit] = getSizeAndUnit(size);
 

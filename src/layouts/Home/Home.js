@@ -1,15 +1,18 @@
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
 
+import { SignIn } from '../SignIn';
 import {
   Audio,
   Equalizer,
   EqualizerSlider,
   Toolbar,
   ToolbarItem,
-  PlayPause,
+  PlayPauseButton,
+  SignOutButton,
   AudioDependenciesProvider,
 } from '../../components';
 
@@ -18,6 +21,9 @@ const AppWrapper = styled.div``;
 
 export const Home = styled(({ className }) => {
   const audioElement = useRef();
+  const isAuthenticated = useSelector((state) => state.user);
+
+  if (!isAuthenticated) return <SignIn NextPageComponent={Home} />;
 
   return (
     <AudioDependenciesProvider audioElement={audioElement}>
@@ -39,9 +45,10 @@ export const Home = styled(({ className }) => {
             left={[<ToolbarItem key="music" icon={<BsMusicNoteList />} />]}
             center={[
               <ToolbarItem key="prev" icon={<BiSkipPrevious />} />,
-              <PlayPause key="play" />,
+              <PlayPauseButton key="play" />,
               <ToolbarItem key="next" icon={<BiSkipNext />} />,
             ]}
+            right={[<SignOutButton key="signout" />]}
           />
         </AppWrapper>
         <div id="modal-wrapper" />

@@ -5,7 +5,7 @@ import { ToolbarItem } from '../Toolbar';
 import { PLAYING } from '../../constants/controlStatus';
 import { toggle } from '../../actions';
 
-export const PlayPause = ({ size }) => {
+export const PlayPauseButton = ({ size }) => {
   const musicStatus = useSelector((state) => state.musicStatus);
   const dispatch = useDispatch();
 

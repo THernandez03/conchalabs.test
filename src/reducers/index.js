@@ -5,6 +5,8 @@ import {
   TOGGLE_MUSIC,
   PLAY_MUSIC,
   PAUSE_MUSIC,
+  SIGN_IN,
+  SIGN_OUT,
 } from '../constants/actionTypes';
 
 export const musicStatus = (state = PAUSED, action) => {
@@ -24,6 +26,22 @@ export const musicStatus = (state = PAUSED, action) => {
   }
 };
 
+export const user = (state = {}, action) => {
+  switch (action.type) {
+    case SIGN_IN: {
+      const { uid, email, displayName } = action.payload.user;
+      return { uid, email, displayName };
+    }
+    case SIGN_OUT: {
+      return {};
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
 export const rootReducer = combineReducers({
   musicStatus,
+  user,
 });
