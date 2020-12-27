@@ -1,11 +1,12 @@
-import { useEffect, forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useEffect, useContext } from 'react';
 import { useSelector } from 'react-redux';
 
+import { AudioDependenciesContext } from '../AudioDependenciesProvider';
 import { PLAYING, PAUSED } from '../../constants/controlStatus';
 
 export const Audio = forwardRef((props, ref) => {
+  const [{ audioContext }] = useContext(AudioDependenciesContext);
   const musicStatus = useSelector((state) => state.musicStatus);
-  const audioContext = useSelector((state) => state.audio.context);
 
   useEffect(() => {
     const toggleMusic = async () => {
@@ -17,7 +18,7 @@ export const Audio = forwardRef((props, ref) => {
       }
     };
     toggleMusic();
-  }, [ref, musicStatus]);
+  }, [ref, musicStatus, audioContext]);
 
   return (
     <audio

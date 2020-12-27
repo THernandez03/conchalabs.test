@@ -1,54 +1,31 @@
-import { Children, cloneElement, useEffect, useState, useReducer } from 'react';
+import { Children, cloneElement, useEffect, useContext, useState } from 'react';
 import styled from '@emotion/styled';
-import { useSelector, useDispatch } from 'react-redux';
 
-const ADD_AUDIO_DEPS = 'ADD_AUDIO_DEPS';
-const ADD_SLIDERS = 'ADD_SLIDERS';
+import { AudioDependenciesContext } from '../../AudioDependenciesProvider';
 
-export const equalizerReducer = (state, action) => {
-  switch (action.type) {
-    case ADD_AUDIO_DEPS: {
-      const { context, source } = action.payload;
-      return { ...state, context, source };
-    }
-    case ADD_SLIDERS: {
-      const { audioContext, mediaSource } = action.payload;
-      return { ...state, sliders };
-    }
-    default: throw new Error('triggered action was not defined in the reducer')
-  }
-}
-
-export const Equalizer = styled(({ className, children, audioElement }) => {
-  const [state, dispatch] = useReducer(equalizerReducer)
-  const { sliders, context, source } = state;
+export const Equalizer = styled(({ className, children }) => {
+  const [sliders, setSliders] = useState();
+  const [audioDependencies] = useContext(AudioDependenciesContext);
+  const { audioContext, mediaSource } = audioDependencies;
 
   useEffect(() => {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audioContext = new AudioContext();
-    const mediaSource = audioContext.createMediaElementSource(audioElement.current);
-
-    dispatch({ type: ADD_AUDIO_DEPS, payload: { audioContext, mediaSource } });
-  }, [audioElement]);
-
-  useEffect(() => {
-    if (!context || !source) return;
+    if (!audioContext || !mediaSource) return;
 
     const cloned = Children.map(children, (child) =>
       cloneElement(child, {
-        biquadFilter: context.createBiquadFilter(),
+        filter: audioContext.createBiquadFilter(),
       }),
     );
 
-    source.disconnect();
+    mediaSource.disconnect();
     const filter = cloned.reduce(
-      (acc, child) => source.connect(child.props.biquadFilter),
-      source,
+      (acc, child) => mediaSource.connect(child.props.filter),
+      mediaSource,
     );
-    filter.connect(context.destination);
+    filter.connect(audioContext.destination);
 
-    dispatch({ type: ADD_SLIDERS, payload: { audioContext, mediaSource } });
-  }, [context, source]);
+    setSliders(cloned);
+  }, [audioContext, mediaSource, children]);
 
   return <div className={className}>{sliders}</div>;
 })`

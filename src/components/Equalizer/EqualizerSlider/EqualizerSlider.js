@@ -1,25 +1,46 @@
 import styled from '@emotion/styled';
 
+const RangeInput = styled.input``;
+
 export const EqualizerSlider = styled(
-  ({ className, type, frequency, biquadFilter }) => {
-    biquadFilter.type = type;
-    biquadFilter.frequency.value = frequency;
+  ({ className, type, filter, frequency }) => {
+    const maxValue = frequency.maxValue || filter.frequency.maxValue;
+    const minValue = frequency.minValue || filter.frequency.minValue;
+    const centerValue = (maxValue + minValue) / 2;
+
+    filter.type = type;
+    filter.frequency.value = frequency.value || centerValue;
+
+    if (type === 'bandpass') {
+      filter.Q.value = centerValue / (maxValue - minValue);
+    }
 
     const handleSliderChange = (event) => {
-      biquadFilter.gain.value = event.target.value;
+      filter.gain.value = event.target.value;
+      console.log({
+        frequency: filter.frequency.value,
+        gain: filter.gain.value,
+        qValue: filter.Q.value,
+      });
     };
 
     return (
-      <input
-        className={className}
-        type="range"
-        defaultValue={0}
-        onChange={handleSliderChange}
-        min="-40"
-        max="40"
-      />
+      <div className={className}>
+        <RangeInput
+          type="range"
+          defaultValue={0}
+          onChange={handleSliderChange}
+          max="40"
+          min="-40"
+        />
+      </div>
     );
   },
 )`
-  transform: rotate(-90deg) scale(2.5);
+  margin: 0 10px;
+  display: flex;
+
+  > ${RangeInput} {
+    transform: rotate(-90deg) scale(2.5);
+  }
 `;
