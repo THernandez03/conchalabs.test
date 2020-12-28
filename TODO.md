@@ -1,4 +1,4 @@
-- [ ] Add Tests
+- [ ] Add tests
 - [ ] Add .env configuration
 
 ### Considerations
