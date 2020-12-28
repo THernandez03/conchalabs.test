@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
-const RangeInput = styled.input``;
+const RangeInput = styled.input`
+  transform: rotate(-90deg) scale(2.5);
+`;
 
 export const EqualizerSlider = styled(
   ({ className, type, filter, frequency }) => {
@@ -8,12 +12,16 @@ export const EqualizerSlider = styled(
     const minValue = frequency.minValue || filter.frequency.minValue;
     const centerValue = (maxValue + minValue) / 2;
 
-    filter.type = type;
-    filter.frequency.value = frequency.value || centerValue;
+    useEffect(() => {
+      filter.type = type;
+      filter.frequency.value = frequency.value || centerValue;
+    }, [filter, type, frequency.value, centerValue]);
 
-    if (type === 'bandpass') {
-      filter.Q.value = centerValue / (maxValue - minValue);
-    }
+    useEffect(() => {
+      if (type === 'bandpass') {
+        filter.Q.value = centerValue / (maxValue - minValue);
+      }
+    }, [maxValue, minValue, centerValue, type, filter.Q]);
 
     const handleSliderChange = (event) => {
       filter.gain.value = event.target.value;
@@ -41,8 +49,17 @@ export const EqualizerSlider = styled(
   width: 50px;
   position: relative;
   left: -40px;
-
-  > ${RangeInput} {
-    transform: rotate(-90deg) scale(2.5);
-  }
 `;
+
+EqualizerSlider.propTypes = {
+  className: PropTypes.string,
+  filter: PropTypes.object,
+  frecuency: PropTypes.shape({
+    maxValue: PropTypes.number,
+    minValue: PropTypes.number,
+    value: PropTypes.number,
+  }),
+  type: PropTypes.oneOf(['lowpass', 'bandpass', 'highpass']),
+};
+
+EqualizerSlider.defaultProps = {};

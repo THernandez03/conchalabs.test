@@ -1,5 +1,6 @@
 import { Children, cloneElement } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 import { getSizeAndUnit } from '../../../utils';
 
@@ -25,3 +26,14 @@ export const ToolbarItem = styled(({ className, icon, onClick, size }) => (
     `;
   }}
 `;
+
+ToolbarItem.propTypes = {
+  className: PropTypes.string,
+  icon: PropTypes.element,
+  size: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+ToolbarItem.defaultProps = {
+  onClick: () => {},
+};

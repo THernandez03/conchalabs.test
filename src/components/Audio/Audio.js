@@ -1,11 +1,11 @@
-import { forwardRef, useEffect, useContext } from 'react';
+import { forwardRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { AudioDependenciesContext } from '../AudioDependenciesProvider';
+import { useAudioDependencies } from '../../hooks';
 import { PLAYING, PAUSED } from '../../constants/controlStatus';
 
 export const Audio = forwardRef((props, ref) => {
-  const [{ audioContext }] = useContext(AudioDependenciesContext);
+  const { audioContext } = useAudioDependencies();
   const musicStatus = useSelector((state) => state.musicStatus);
 
   useEffect(() => {
@@ -30,3 +30,7 @@ export const Audio = forwardRef((props, ref) => {
     </audio>
   );
 });
+
+Audio.propTypes = {};
+
+Audio.defaultProps = {};

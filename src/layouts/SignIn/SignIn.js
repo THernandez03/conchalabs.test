@@ -35,4 +35,7 @@ export const SignIn = styled(({ className, NextPageComponent }) => {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background: #2980b9;
+  background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
+  background: linear-gradient(to right, #2c3e50, #2980b9);
 `;

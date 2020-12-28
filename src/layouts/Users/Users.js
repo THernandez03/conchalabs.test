@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '@firebase/app';
 
-import { getAllUsers } from '../../apiRequests';
+import { User } from '../../apiRequests';
 import { SignIn } from '../SignIn';
 import { Toolbar, SignOutButton } from '../../components';
 
@@ -16,7 +16,7 @@ export const Users = styled(({ className }) => {
 
   useEffect(() => {
     const request = async () => {
-      setUsers(await getAllUsers());
+      setUsers(await User.getAll());
     };
     request();
   }, []);

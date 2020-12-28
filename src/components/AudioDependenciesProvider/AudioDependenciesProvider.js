@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
-export const AudioDependenciesContext = createContext([]);
+export const AudioDependenciesContext = createContext({});
 
 export const AudioDependenciesProvider = ({ children, audioElement }) => {
   const [audioDependencies, setAudioDependencies] = useState({});
@@ -14,14 +15,22 @@ export const AudioDependenciesProvider = ({ children, audioElement }) => {
       audioElement.current,
     );
 
-    setAudioDependencies({ audioContext, mediaSource });
+    setAudioDependencies({ audioContext, mediaSource, audioElement });
   }, [audioElement]);
 
   return (
-    <AudioDependenciesContext.Provider
-      value={[audioDependencies, setAudioDependencies]}
-    >
+    <AudioDependenciesContext.Provider value={audioDependencies}>
       {children}
     </AudioDependenciesContext.Provider>
   );
 };
+
+AudioDependenciesProvider.propTypes = {
+  audioElement: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+};
+
+AudioDependenciesProvider.defaultProps = {};

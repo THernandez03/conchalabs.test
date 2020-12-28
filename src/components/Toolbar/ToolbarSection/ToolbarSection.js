@@ -1,5 +1,6 @@
 import { Children, cloneElement } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 import { ToolbarItem } from '../ToolbarItem';
 
@@ -20,3 +21,14 @@ export const ToolbarSection = styled(({ children, className, size }) => (
     }
   }}
 `;
+
+ToolbarSection.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  className: PropTypes.string,
+  size: PropTypes.string,
+};
+
+ToolbarSection.defaultProps = {};

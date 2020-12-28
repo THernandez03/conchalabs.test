@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import { ToolbarSection } from '../ToolbarSection';
-import { getSizeAndUnit } from '../../../utils';
 
 export const Toolbar = styled(({ className, size, left, center, right }) => (
   <div className={className}>
@@ -24,23 +23,25 @@ export const Toolbar = styled(({ className, size, left, center, right }) => (
   background: #282828;
   border-top: 1px solid #000;
 
-  ${({ size, left, right }) => {
-    const maxElements = Math.max(...[left.length, right.length]);
-    const [value, unit] = getSizeAndUnit(size);
+  > ${ToolbarSection} {
+    flex: 1;
+    justify-content: center;
+  }
 
-    return `
-      > div:first-of-type,
-      > div:last-of-type{
-        min-width: ${maxElements * value * 2}${unit};
-      }
-    `;
-  }}
+  > ${ToolbarSection}:first-of-type {
+    justify-content: flex-start;
+  }
+
+  > ${ToolbarSection}:last-of-type {
+    justify-content: flex-end;
+  }
 `;
 
 Toolbar.propTypes = {
   center: PropTypes.arrayOf(PropTypes.element),
   left: PropTypes.arrayOf(PropTypes.element),
   right: PropTypes.arrayOf(PropTypes.element),
+  size: PropTypes.string,
 };
 
 Toolbar.defaultProps = {
