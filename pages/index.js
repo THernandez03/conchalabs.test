@@ -15,6 +15,7 @@ const cssGlobal = css`
   body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    min-width: 250px;
   }
 `;
 

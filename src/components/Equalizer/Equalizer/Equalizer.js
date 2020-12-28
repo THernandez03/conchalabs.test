@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 
 import { AudioDependenciesContext } from '../../AudioDependenciesProvider';
 
+const InnerWrapper = styled.div``;
+
 export const Equalizer = styled(({ className, children }) => {
   const [sliders, setSliders] = useState();
   const [audioDependencies] = useContext(AudioDependenciesContext);
@@ -27,10 +29,21 @@ export const Equalizer = styled(({ className, children }) => {
     setSliders(cloned);
   }, [audioContext, mediaSource, children]);
 
-  return <div className={className}>{sliders}</div>;
+  return (
+    <div className={className}>
+      <InnerWrapper>{sliders}</InnerWrapper>
+    </div>
+  );
 })`
   display: flex;
   flex-grow: 1;
   align-items: center;
-  justify-content: center;
+
+  > ${InnerWrapper} {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    max-width: 768px;
+    margin: 0 auto;
+  }
 `;

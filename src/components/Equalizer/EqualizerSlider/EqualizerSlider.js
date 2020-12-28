@@ -37,8 +37,10 @@ export const EqualizerSlider = styled(
     );
   },
 )`
-  margin: 0 10px;
   display: flex;
+  width: 50px;
+  position: relative;
+  left: -40px;
 
   > ${RangeInput} {
     transform: rotate(-90deg) scale(2.5);
