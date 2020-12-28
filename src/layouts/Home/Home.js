@@ -21,7 +21,7 @@ const AppWrapper = styled.div``;
 
 export const Home = styled(({ className }) => {
   const audioElement = useRef();
-  const isAuthenticated = useSelector((state) => state.user);
+  const isAuthenticated = useSelector((state) => state.user.uid);
 
   if (!isAuthenticated) return <SignIn NextPageComponent={Home} />;
 

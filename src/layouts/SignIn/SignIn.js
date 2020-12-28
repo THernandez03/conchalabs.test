@@ -1,20 +1,25 @@
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from '@emotion/styled';
-import { useQuery } from 'react-query';
 import firebase from '@firebase/app';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import { createUser } from '../../apiRequests';
 import { signIn } from '../../actions';
 import { Home } from '../Home';
 
 export const SignIn = styled(({ className, NextPageComponent }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
+  const isSignedIn = useSelector((state) => state.user.uid);
   const dispatch = useDispatch();
 
-  if (loading) return null;
+  useEffect(() => {
+    if (!user) return;
+    createUser({ user });
+  }, [user]);
 
   if (user && !loading && !error) {
-    dispatch(signIn({ user }));
+    if (!isSignedIn) dispatch(signIn({ user }));
     return NextPageComponent ? <NextPageComponent /> : <Home />;
   }
 

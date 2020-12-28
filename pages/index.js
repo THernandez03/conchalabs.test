@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { Global, css } from '@emotion/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import firebase from '@firebase/app';
 import '@firebase/auth';
 
@@ -16,27 +15,27 @@ const cssGlobal = css`
   }
 `;
 
-const queryClient = new QueryClient();
-
 export const Index = () => {
   const [initialized, setInitialized] = useState();
 
   useEffect(() => {
-    firebase.initializeApp(config);
+    if (firebase.apps.length) {
+      firebase.app();
+    } else {
+      firebase.initializeApp(config);
+    }
     setInitialized(true);
   }, []);
 
   if (!initialized) return null;
 
   return (
-    <React.StrictMode>
-      <Provider store={getStore()}>
-        <QueryClientProvider client={queryClient}>
-          <Global styles={cssGlobal} />
-          <SignIn NextPageComponent={Home} />
-        </QueryClientProvider>
-      </Provider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <Provider store={getStore()}>
+      <Global styles={cssGlobal} />
+      <SignIn NextPageComponent={Home} />
+    </Provider>
+    // </React.StrictMode>
   );
 };
 
