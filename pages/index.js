@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { StrictMode, useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { Global, css } from '@emotion/react';
 import firebase from '@firebase/app';
@@ -9,9 +9,12 @@ import { getStore } from '../src/configs/redux/store';
 import { SignIn, Home } from '../src/layouts';
 
 const cssGlobal = css`
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
   html,
   body {
     margin: 0;
+    font-family: 'Roboto', sans-serif;
   }
 `;
 
@@ -30,12 +33,12 @@ export const Index = () => {
   if (!initialized) return null;
 
   return (
-    // <React.StrictMode>
-    <Provider store={getStore()}>
-      <Global styles={cssGlobal} />
-      <SignIn NextPageComponent={Home} />
-    </Provider>
-    // </React.StrictMode>
+    <StrictMode>
+      <Provider store={getStore()}>
+        <Global styles={cssGlobal} />
+        <SignIn NextPageComponent={Home} />
+      </Provider>
+    </StrictMode>
   );
 };
 

@@ -1,38 +1,25 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import firebase from '@firebase/app';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { createUser } from '../../apiRequests';
-import { signIn } from '../../actions';
 import { Home } from '../Home';
+import { SignInButton } from '../../components';
 
 export const SignIn = styled(({ className, NextPageComponent }) => {
-  const [user, loading, error] = useAuthState(firebase.auth());
-  const isSignedIn = useSelector((state) => state.user.uid);
-  const dispatch = useDispatch();
+  const [Component, setComponent] = useState();
+  const [loggedUser] = useAuthState(firebase.auth());
 
   useEffect(() => {
-    if (!user) return;
-    createUser({ user });
-  }, [user]);
+    if (!loggedUser) return;
+    setComponent(NextPageComponent || Home);
+  }, [loggedUser, NextPageComponent]);
 
-  if (user && !loading && !error) {
-    if (!isSignedIn) dispatch(signIn({ user }));
-    return NextPageComponent ? <NextPageComponent /> : <Home />;
-  }
-
-  const handleSignInClick = () => {
-    const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(googleAuthProvider);
-  };
+  if (loggedUser && Component) return <Component />;
 
   return (
     <div className={className}>
-      <button type="button" onClick={handleSignInClick}>
-        SignIn
-      </button>
+      <SignInButton />
     </div>
   );
 })`

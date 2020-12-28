@@ -1,8 +1,9 @@
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 import { BsMusicNoteList } from 'react-icons/bs';
 import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from '@firebase/app';
 
 import { SignIn } from '../SignIn';
 import {
@@ -21,9 +22,9 @@ const AppWrapper = styled.div``;
 
 export const Home = styled(({ className }) => {
   const audioElement = useRef();
-  const isAuthenticated = useSelector((state) => state.user.uid);
+  const [loggedUser] = useAuthState(firebase.auth());
 
-  if (!isAuthenticated) return <SignIn NextPageComponent={Home} />;
+  if (!loggedUser) return <SignIn NextPageComponent={Home} />;
 
   return (
     <AudioDependenciesProvider audioElement={audioElement}>
