@@ -15,7 +15,11 @@ export const AudioDependenciesProvider = ({ children, audioElement }) => {
       audioElement.current,
     );
 
-    setAudioDependencies({ audioContext, mediaSource, audioElement });
+    setAudioDependencies({
+      audioContext,
+      mediaSource,
+      audioElement: audioElement.current,
+    });
   }, [audioElement]);
 
   return (

@@ -7,8 +7,34 @@ import { User } from '../../apiRequests';
 import { SignIn } from '../SignIn';
 import { Toolbar, SignOutButton } from '../../components';
 
-const UserListWrapper = styled.div``;
-const UserListItem = styled.div``;
+const UserListWrapper = styled.div`
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #f3904f;
+  background: -webkit-linear-gradient(to right, #3b4371, #f3904f);
+  background: linear-gradient(to right, #3b4371, #f3904f);
+  padding: 50px 0;
+`;
+
+const UserListItem = styled.div`
+  font-size: 25px;
+  margin: 5px 0;
+
+  &:nth-child(odd) {
+    color: #fdfdfd;
+    text-shadow: 0 0 12px #000, 0 0 10px #03edf975, 0 0 15px #03edf975,
+      0 0 25px #03edf975;
+  }
+
+  &:nth-child(even) {
+    color: #fff5f6;
+    text-shadow: 0 0 12px #000, 0 0 10px #fc1f2c75, 0 0 15px #fc1f2c75,
+      0 0 25px #fc1f2c75;
+  }
+`;
 
 export const Users = styled(({ className }) => {
   const [users, setUsers] = useState([]);
@@ -39,16 +65,4 @@ export const Users = styled(({ className }) => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
-  > ${UserListWrapper} {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    > ${UserListItem} {
-      font: 'Roboto';
-    }
-  }
 `;

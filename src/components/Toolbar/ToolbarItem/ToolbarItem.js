@@ -4,13 +4,22 @@ import PropTypes from 'prop-types';
 
 import { getSizeAndUnit } from '../../../utils';
 
-export const ToolbarItem = styled(({ className, icon, onClick, size }) => (
-  <button className={className} type="button" onClick={onClick}>
-    {Children.map(icon, (child) => cloneElement(child, { size }))}
-  </button>
-))`
+export const ToolbarItem = styled(
+  ({ className, icon, onClick, size, isDisabled }) => (
+    <button
+      className={className}
+      type="button"
+      onClick={onClick}
+      disabled={isDisabled}
+    >
+      {Children.map(icon, (child) => cloneElement(child, { size }))}
+    </button>
+  ),
+)`
   border: 0;
   border-radius: 50px;
+
+  ${({ isDisabled }) => (isDisabled ? `cursor: default;` : 'cursor: pointer;')}
 
   > svg {
     margin-top: 0.1rem;

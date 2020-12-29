@@ -7,25 +7,35 @@ import { PLAYING, PAUSED } from '../../constants/controlStatus';
 export const Audio = forwardRef((props, ref) => {
   const { audioContext } = useAudioDependencies();
   const musicStatus = useSelector((state) => state.musicStatus);
+  const selectedItem = useSelector((state) => state.selectedItem);
+
+  const isPlaying = musicStatus === PLAYING;
+  const isPaused = musicStatus === PAUSED;
+
+  /* eslint-disable no-undefined */
+  const src = selectedItem ? `sounds/${selectedItem}` : undefined;
 
   useEffect(() => {
     const toggleMusic = async () => {
-      if (musicStatus === PLAYING) {
+      if (isPlaying) {
         await audioContext?.resume();
         ref.current.play();
-      } else if (musicStatus === PAUSED) {
+      } else if (isPaused) {
         ref.current.pause();
       }
     };
     toggleMusic();
-  }, [ref, musicStatus, audioContext]);
+  }, [ref, musicStatus, audioContext, isPlaying, isPaused]);
+
+  useEffect(() => {
+    if (selectedItem && isPlaying) {
+      ref.current.pause();
+      ref.current.play();
+    }
+  }, [ref, selectedItem, isPlaying]);
 
   return (
-    <audio
-      ref={ref}
-      loop
-      src="try-it-now_nature_Eventually,_all_things_merge_into_one,_and_a_river_runs_through_it_burgh_gentle_stream_12.wav"
-    >
+    <audio ref={ref} loop src={src}>
       <track default kind="captions" />
     </audio>
   );

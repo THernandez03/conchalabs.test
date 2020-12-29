@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import styled from '@emotion/styled';
 import { BsMusicNoteList } from 'react-icons/bs';
-import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '@firebase/app';
+import { useDispatch } from 'react-redux';
 
+import { showSidebar } from '../../actions';
 import { SignIn } from '../SignIn';
 import {
   Audio,
@@ -15,23 +16,31 @@ import {
   PlayPauseButton,
   SignOutButton,
   AudioDependenciesProvider,
+  MusicList,
 } from '../../components';
 
-const SetupWrapper = styled.div``;
-const AppWrapper = styled.div``;
+const AppWrapper = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
 
 export const Home = styled(({ className }) => {
   const audioElement = useRef();
   const [loggedUser] = useAuthState(firebase.auth());
+  const dispatch = useDispatch();
 
   if (!loggedUser) return <SignIn NextPageComponent={Home} />;
 
   return (
     <AudioDependenciesProvider audioElement={audioElement}>
       <div className={className}>
-        <SetupWrapper>
+        <div>
           <Audio ref={audioElement} />
-        </SetupWrapper>
+        </div>
+        <MusicList
+          list={['Nature.wav', 'Restaurant.wav', '1000Hz.wav', '1100Hz.wav']}
+        />
         <AppWrapper>
           <Equalizer>
             <EqualizerSlider type="lowpass" frequency={{ value: 1000 }} />
@@ -43,12 +52,14 @@ export const Home = styled(({ className }) => {
           </Equalizer>
           <Toolbar
             size="1.5rem"
-            left={[<ToolbarItem key="music" icon={<BsMusicNoteList />} />]}
-            center={[
-              <ToolbarItem key="prev" icon={<BiSkipPrevious />} />,
-              <PlayPauseButton key="play" />,
-              <ToolbarItem key="next" icon={<BiSkipNext />} />,
+            left={[
+              <ToolbarItem
+                key="list"
+                icon={<BsMusicNoteList />}
+                onClick={() => dispatch(showSidebar())}
+              />,
             ]}
+            center={[<PlayPauseButton key="play" />]}
             right={[<SignOutButton key="signout" />]}
           />
         </AppWrapper>
@@ -56,10 +67,4 @@ export const Home = styled(({ className }) => {
       </div>
     </AudioDependenciesProvider>
   );
-})`
-  > ${AppWrapper} {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-`;
+});

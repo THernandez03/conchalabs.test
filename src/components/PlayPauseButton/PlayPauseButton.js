@@ -8,6 +8,7 @@ import { toggle } from '../../actions';
 
 export const PlayPauseButton = ({ size }) => {
   const musicStatus = useSelector((state) => state.musicStatus);
+  const selectedMusic = useSelector((state) => state.selectedItem);
   const dispatch = useDispatch();
 
   const isPlaying = musicStatus === PLAYING || false;
@@ -18,7 +19,12 @@ export const PlayPauseButton = ({ size }) => {
   );
 
   return (
-    <ToolbarItem icon={icon} onClick={() => dispatch(toggle())} size={size} />
+    <ToolbarItem
+      icon={icon}
+      onClick={() => dispatch(toggle())}
+      size={size}
+      isDisabled={!selectedMusic}
+    />
   );
 };
 
