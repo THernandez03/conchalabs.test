@@ -44,9 +44,9 @@ export const Equalizer = styled(({ className, children }) => {
   display: flex;
   flex-grow: 1;
   align-items: center;
-  background: #34e89e;
-  background: -webkit-linear-gradient(to right, #0f3443, #34e89e);
-  background: linear-gradient(to right, #0f3443, #34e89e);
+  background: #2980b9;
+  background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
+  background: linear-gradient(to right, #2c3e50, #2980b9);
 `;
 
 Equalizer.propTypes = {

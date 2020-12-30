@@ -7,3 +7,4 @@ export * from './SignInButton';
 export * from './SignOutButton';
 export * from './AudioDependenciesProvider';
 export * from './MusicList';
+export * from './Path';

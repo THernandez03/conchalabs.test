@@ -50,7 +50,7 @@ export const MusicList = styled(({ className, list }) => {
     border-top: 1px solid #0051ec;
     background: #0057ff;
     color: #ffffff;
-    height: 51px;
+    height: 48px;
 
     &:hover {
       font-weight: bold;

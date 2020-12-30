@@ -17,6 +17,7 @@ import {
   SignOutButton,
   AudioDependenciesProvider,
   MusicList,
+  Path,
 } from '../../components';
 
 const AppWrapper = styled.div`
@@ -36,6 +37,7 @@ export const Home = styled(({ className }) => {
     <AudioDependenciesProvider audioElement={audioElement}>
       <div className={className}>
         <div>
+          <Path />
           <Audio ref={audioElement} />
         </div>
         <MusicList

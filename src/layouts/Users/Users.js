@@ -5,7 +5,7 @@ import firebase from '@firebase/app';
 
 import { User } from '../../apiRequests';
 import { SignIn } from '../SignIn';
-import { Toolbar, SignOutButton } from '../../components';
+import { Toolbar, SignOutButton, Path } from '../../components';
 
 const UserListWrapper = styled.div`
   display: flex;
@@ -13,9 +13,9 @@ const UserListWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: #f3904f;
-  background: -webkit-linear-gradient(to right, #3b4371, #f3904f);
-  background: linear-gradient(to right, #3b4371, #f3904f);
+  background: #2980b9;
+  background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
+  background: linear-gradient(to right, #2c3e50, #2980b9);
   padding: 50px 0;
 `;
 
@@ -51,6 +51,7 @@ export const Users = styled(({ className }) => {
 
   return (
     <div className={className}>
+      <Path />
       <UserListWrapper>
         {users.map((user) => (
           <UserListItem key={user.ID}>

@@ -24,6 +24,7 @@ export const SignIn = styled(({ className, NextPageComponent }) => {
   }, [user.uid, loggedUser, dispatch]);
 
   if (loggedUser && Component) return <Component />;
+  if (loggedUser) return <div className={className} />;
 
   return (
     <div className={className}>

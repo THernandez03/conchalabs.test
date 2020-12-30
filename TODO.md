@@ -1,7 +1,6 @@
 - [ ] Add tests
 - [ ] Downgrade Node to LTS
 - [ ] docker-compose.yml
-- [ ] Update README.md
-- [ ] Add link to go to /users and / page
+- [ ] Update README.md - remember to add the keys request
 - [ ] Better random algorithm
 - [ ] Refactor store
