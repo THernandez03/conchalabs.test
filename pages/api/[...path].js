@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-const API_HOST = 'https://interviews-backend-api.herokuapp.com';
-const KEY = '2Qeo-3HfcTYgfHSG6hbYDDwQKXGzq9MT';
+const { API_HOST, API_KEY } = process.env;
 
 export default async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -16,7 +15,7 @@ export default async (req, res) => {
     method: req.method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: KEY,
+      Authorization: API_KEY,
     },
     ...postParams,
   });
