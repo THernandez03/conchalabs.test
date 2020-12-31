@@ -23,13 +23,13 @@ const UserListItem = styled.div`
   font-size: 25px;
   margin: 5px 0;
 
-  &:nth-child(odd) {
+  &:nth-of-type(odd) {
     color: #fdfdfd;
     text-shadow: 0 0 12px #000, 0 0 10px #03edf975, 0 0 15px #03edf975,
       0 0 25px #03edf975;
   }
 
-  &:nth-child(even) {
+  &:nth-of-type(even) {
     color: #fff5f6;
     text-shadow: 0 0 12px #000, 0 0 10px #fc1f2c75, 0 0 15px #fc1f2c75,
       0 0 25px #fc1f2c75;

@@ -1,5 +1,4 @@
 - [ ] Add tests
-- [ ] Downgrade Node to LTS
 - [ ] docker-compose.yml
 - [ ] Update README.md - remember to add the keys request
 - [ ] Better random algorithm
