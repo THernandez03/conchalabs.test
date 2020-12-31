@@ -20,18 +20,13 @@ export const EqualizerSlider = styled(
     }, [filter, type, frequency.value, centerValue]);
 
     useEffect(() => {
-      if (type === 'bandpass') {
+      if (type === 'peaking') {
         filter.Q.value = centerValue / (maxValue - minValue);
       }
     }, [maxValue, minValue, centerValue, type, filter.Q]);
 
     const handleSliderChange = (event) => {
       filter.gain.value = event.target.value;
-      console.log({
-        frequency: filter.frequency.value,
-        gain: filter.gain.value,
-        qValue: filter.Q.value,
-      });
     };
 
     return (

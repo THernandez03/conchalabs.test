@@ -22,12 +22,13 @@ export const Equalizer = styled(({ className, children }) => {
     const cloned = Children.map(children, (child) =>
       cloneElement(child, {
         filter: audioContext.createBiquadFilter(),
+        gain: audioContext.createGain(),
       }),
     );
 
     mediaSource.disconnect();
     const filter = cloned.reduce(
-      (acc, child) => mediaSource.connect(child.props.filter),
+      (acc, child) => acc.connect(child.props.filter),
       mediaSource,
     );
     filter.connect(audioContext.destination);

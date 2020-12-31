@@ -45,12 +45,12 @@ export const Home = styled(({ className }) => {
         />
         <AppWrapper>
           <Equalizer>
-            <EqualizerSlider type="lowpass" frequency={{ value: 1000 }} />
+            <EqualizerSlider type="lowshelf" frequency={{ value: 1000 }} />
             <EqualizerSlider
-              type="bandpass"
+              type="peaking"
               frequency={{ minValue: 1000, maxValue: 4000 }}
             />
-            <EqualizerSlider type="highpass" frequency={{ value: 4000 }} />
+            <EqualizerSlider type="highshelf" frequency={{ value: 4000 }} />
           </Equalizer>
           <Toolbar
             size="1.5rem"
