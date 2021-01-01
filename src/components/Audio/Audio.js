@@ -17,22 +17,24 @@ export const Audio = forwardRef((props, ref) => {
 
   useEffect(() => {
     const toggleMusic = async () => {
+      if (!src || !audioContext) return;
+
       if (isPlaying) {
-        await audioContext?.resume();
+        await audioContext.resume();
         ref.current.play();
       } else if (isPaused) {
         ref.current.pause();
       }
     };
     toggleMusic();
-  }, [ref, musicStatus, audioContext, isPlaying, isPaused]);
+  }, [ref, audioContext, isPlaying, isPaused, src]);
 
   useEffect(() => {
-    if (selectedItem && isPlaying) {
+    if (src && selectedItem && isPlaying) {
       ref.current.pause();
       ref.current.play();
     }
-  }, [ref, selectedItem, isPlaying]);
+  }, [ref, selectedItem, isPlaying, src]);
 
   return (
     <audio ref={ref} loop src={src}>

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Overlay/> Should render the componente 1`] = `
+<div>
+  <div
+    class="css-27c4mj-Overlay e1otb7v0"
+  />
+</div>
+`;

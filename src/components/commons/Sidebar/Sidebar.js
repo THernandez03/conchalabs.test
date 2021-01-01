@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
@@ -10,10 +10,8 @@ export const Sidebar = styled(({ className, children, isOpened }) => {
   return (
     <div className={className}>
       {children}
-      {ReactDOM.createPortal(
-        <Overlay />,
-        document.querySelector('#modal-wrapper'),
-      )}
+
+      {createPortal(<Overlay />, document.querySelector('#modal-wrapper'))}
     </div>
   );
 })`
@@ -38,7 +36,7 @@ Sidebar.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-  ]).isRequired,
+  ]),
   className: PropTypes.string,
   isOpened: PropTypes.bool,
 };

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AudioDependenciesProvider/> Should render the children 1`] = `
+<div>
+  Example
+</div>
+`;
+
+exports[`<AudioDependenciesProvider/> Should return valid value when audioElement is passed as props 1`] = `
+Object {
+  "audioContext": Object {
+    "createMediaElementSource": [Function],
+  },
+  "audioElement": <div />,
+  "mediaSource": "mediaSource",
+}
+`;

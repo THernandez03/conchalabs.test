@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Sidebar/> Should have different css when "isOpened" is true 1`] = `"css-1p6088f-Sidebar e19m2rzp0"`;
+
+exports[`<Sidebar/> Should have different css when "isOpened" is true 2`] = `"css-t0ugvi-Sidebar e19m2rzp0"`;
+
+exports[`<Sidebar/> Should have different css when "isOpened" is true 3`] = `"css-1p6088f-Sidebar e19m2rzp0"`;
+
+exports[`<Sidebar/> Should render the component 1`] = `
+<div>
+  <div
+    class="css-1p6088f-Sidebar e19m2rzp0"
+  />
+</div>
+`;

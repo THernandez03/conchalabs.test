@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Audio/> Should render an <audio> element 1`] = `
+<div>
+  <audio
+    loop=""
+    src="sounds/example.wav"
+  >
+    <track
+      default=""
+      kind="captions"
+    />
+  </audio>
+</div>
+`;

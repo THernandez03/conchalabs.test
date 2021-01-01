@@ -12,7 +12,7 @@ export const SignInButton = styled(({ className }) => {
   const handleSignInClick = async () => {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     const { user } = await firebase.auth().signInWithPopup(googleAuthProvider);
-    await User.create({ user });
+    await User.create(user);
     dispatch(signIn({ user }));
   };
 

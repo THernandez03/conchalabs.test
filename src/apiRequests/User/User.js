@@ -1,5 +1,5 @@
 export const User = {
-  async create({ user }) {
+  async create(user) {
     const { uid, email, displayName } = user || {};
     const request = await fetch('/api/v1/users', {
       method: 'POST',
