@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Equalizer/> Should render the component 1`] = `
+<div>
+  <div
+    class="css-h3x0xf-Equalizer e4ja4jf0"
+  >
+    <div
+      class="css-1ee0tmd-InnerWrapper e4ja4jf1"
+    />
+  </div>
+</div>
+`;

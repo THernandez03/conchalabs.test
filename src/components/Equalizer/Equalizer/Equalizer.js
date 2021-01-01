@@ -17,12 +17,11 @@ export const Equalizer = styled(({ className, children }) => {
   const { audioContext, mediaSource } = useAudioDependencies();
 
   useEffect(() => {
-    if (!audioContext || !mediaSource) return;
+    if (!audioContext || !mediaSource || !children) return;
 
     const cloned = Children.map(children, (child) =>
       cloneElement(child, {
         filter: audioContext.createBiquadFilter(),
-        gain: audioContext.createGain(),
       }),
     );
 
@@ -54,7 +53,7 @@ Equalizer.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-  ]).isRequired,
+  ]),
   className: PropTypes.string,
 };
 
