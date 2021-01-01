@@ -58,7 +58,7 @@ EqualizerSlider.propTypes = {
     minValue: PropTypes.number,
     value: PropTypes.number,
   }),
-  type: PropTypes.oneOf(['lowpass', 'bandpass', 'highpass']),
+  type: PropTypes.oneOf(['lowshelf', 'peaking', 'highshelf']),
 };
 
 EqualizerSlider.defaultProps = {};
