@@ -1,5 +1,0 @@
-- [ ] Add tests
-- [ ] docker-compose.yml
-- [ ] Update README.md - remember to add the keys request
-- [ ] Better random algorithm
-- [ ] Refactor store

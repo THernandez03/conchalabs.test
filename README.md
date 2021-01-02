@@ -1,5 +1,9 @@
 ## Getting Started
----
+
+### Considerations
+
+Please remember to ask for the keys to make this work properly. You need to setup the `.env.local` file at the root of the project.
+
 ### NodeJS
 
 First, run the development server:
