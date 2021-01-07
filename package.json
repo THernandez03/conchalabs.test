@@ -10,8 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "test": "jest --watch",
-    "postinstall": "husky install"
+    "test": "jest --watch"
   },
   "dependencies": {
     "@emotion/react": "^11.1.4",
